@@ -1,0 +1,31 @@
+security = setclipboard
+bs = setreadonly
+local ong
+ong = hookfunction(game.HttpGet, function(useless,url,...)
+    security(url)
+    return ong(useless,url,...)
+end)
+local ol
+ol = hookfunction(game.HttpGetAsync, function(useless,url,...)
+    security(url)
+    return ol(useless,url,...)
+end)
+local o
+o = hookfunction(game.HttpPost, function(useless,url,...)
+    security(url)
+    return o(useless,url,...)
+end)
+local fr
+fr = hookfunction(game.HttpPostAsync, function(useless,url,...)
+    security(url)
+    return fr(useless,url,...)
+end)
+if syn then
+    local old = syn.request
+    bs(syn, false)
+    syn.request = function(data)
+        security(data.Url)
+        return old(data)
+    end,
+   bs(syn, true)
+end
